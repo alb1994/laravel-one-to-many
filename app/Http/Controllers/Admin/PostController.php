@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\post;
 use App\Http\Requests\StorepostRequest;
 use App\Http\Requests\UpdatepostRequest;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -28,7 +29,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories =Category::all();
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -86,7 +88,8 @@ class PostController extends Controller
      */
     public function edit(post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories =Category::all();
+        return view('admin.posts.edit', compact('post','categories'));
     }
 
     /**

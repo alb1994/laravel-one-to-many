@@ -24,17 +24,21 @@ class StorepostRequest extends FormRequest
     public function rules()
     {
         return [
-        'title' => 'required|max:50',
-        'cover_image' => 'image|max:550'
-
+            'title' => 'required|max:50',
+            'cover_image' => 'image|max:550',
+            'category_id' => 'required|exists:categories,id' // Corretto il nome del campo "category_id"
         ];
     }
-    public function messages(){
-        return[
+
+    public function messages()
+    {
+        return [
             'title.required' => 'Il titolo è obbligatorio',
-            'title.max' => 'il titolo deve essere lungo al massimo :max caratteri',
-            'cover_image.image' => 'il file conteiene un formato non supportato',
-            'cover_image.max' => 'il nome del file deve contenere piu di 550 caratteri'
+            'title.max' => 'Il titolo deve essere lungo al massimo :max caratteri',
+            'cover_image.image' => 'Il file contiene un formato non supportato',
+            'cover_image.max' => 'Il nome del file deve contenere meno di :max caratteri', // Corretto il messaggio
+            'category_id.required' => 'Devi selezionare una categoria',
+            'category_id.exists' => 'Categoria selezionata non valida'
         ];
     }
 }
